@@ -11,6 +11,7 @@ class Perceptron:
     def balanceo_peso(self):
         salidas_obtenidas=[]
         deltas=[]
+        # plt.plot(self.pesos,'r')
             # suma ponderada inicial
         for i in range(len(self.entradas)):
             prod_escalar=np.dot(self.pesos[i],self.entradas[i])  
@@ -32,12 +33,10 @@ class Perceptron:
             variaciones.append(variacion_peso)
         
         self.pesos=self.pesos+variaciones
+        return self.pesos
         # print(errores)
-        print(self.pesos)
-        # xpoints = np.array([0, 6])
-        # ypoints = np.array([0, 250])
-        # plt.plot(xpoints, ypoints)
-        # plt.show()
+        
+
         
     def sigmoidea(self,salida_obtenida):
         sig = 1/(1 + math.exp(-salida_obtenida))
@@ -49,7 +48,29 @@ np_matrix_salidas=np.array([0,1,0,0])
 and_perceptor=Perceptron(np_matrix_pesos,np_matrix_entradas,np_matrix_salidas)
 if __name__=="__main__":
     contador=0
-    while contador<5:
-        print(and_perceptor.balanceo_peso())
+    pesos=[]
+    peso1=[]
+    peso2=[]
+    peso3=[]
+    while contador<500:
+        pesos_balanceados=and_perceptor.balanceo_peso()
+        pesos.append(pesos_balanceados)
         contador+=1
         
+    for peso in pesos:
+        for j in peso:
+            count=0
+            for k in j:
+                if count==0:
+                    peso1.append(k)
+                if count==1:
+                    peso2.append(k)
+                if count==2:
+                    peso3.append(k)
+                count+=1 
+    # print(peso1)
+    # print(peso2) 
+    plt.plot(peso1,'g')
+    plt.plot(peso2,'r')
+    plt.plot(peso3,'k')
+    plt.show()
