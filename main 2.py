@@ -1,4 +1,3 @@
-from stringprep import c7_set
 import numpy as np
 import math
 import matplotlib.pyplot as plt
